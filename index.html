@@ -1,41 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>Suara MC</title>
+<style>... (full code ada di file yang gua bikin)</style>
+</head>
+<body>
+<input id="reqName" value="Rahmad Pratama balee kancai kenak die">
+<button onclick="playMC()">PLAY MC</button>
+<button onclick="playMCFunkot()">PLAY + FUNKOT</button>
 <script>
-// INI MESIN MC FUNKOT - BISA GANTI NAMA OTOMATIS
-function playMC(requestName){
-  if(!window.speechSynthesis) return;
-  speechSynthesis.cancel();
-  // INI TEKS YANG DIOMONGIN MC
-  let teks = `Spesial request, ${requestName}, balee kancai kenak die! DJ DS on the mix!`;
-  let msg = new SpeechSynthesisUtterance(teks);
-  msg.lang = 'id-ID';
-  msg.rate = 0.85;  // pelan ala DJ
-  msg.pitch = 0.6;  // suara berat
-  msg.volume = 1;
-  // pakai suara Indo kalo ada
-  let voices = speechSynthesis.getVoices();
-  let indo = voices.find(v=>v.lang.includes('id')) || voices[0];
-  if(indo) msg.voice = indo;
-  speechSynthesis.speak(msg);
-  
-  // tampilkan teks di layar
-  document.getElementById('loginErr').innerHTML = 
-    `🎙️ SPECIAL REQUEST:<br><b style="color:gold">${requestName.toUpperCase()}</b><br> BALEE KANCAI KENAK DIE!`;
+function playMC(){
+ let name=document.getElementById('reqName').value;
+ let msg=new SpeechSynthesisUtterance(`Spesial request, ${name}!`);
+ msg.lang='id-ID'; msg.rate=0.85; msg.pitch=0.6;
+ speechSynthesis.speak(msg);
 }
-
-// CONTOH PAKAI DI LOGIN
-function doLogin(){
-  let nama = document.getElementById('user').value.trim();
-  if(nama.length<2) return;
-  
-  // DI SINI LU GANTI NAMA REQUEST NYA!
-  // misal mau request Rahmad Pratama:
-  playMC("Rahmad Pratama");
-  
-  // atau mau request Papa Elbay dan Yonz:
-  // playMC("Papa Elbay dan Yonz");
-  
-  setTimeout(()=>{ goPage('pMenu'); }, 4000);
-}
-
-// BIAR SUARA BISA KELUAR DI HP (harus load dulu)
-window.speechSynthesis.onvoiceschanged = ()=>{ speechSynthesis.getVoices(); };
 </script>
+</body>
+</html>
