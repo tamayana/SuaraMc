@@ -1,22 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<title>Suara MC</title>
-<style>... (full code ada di file yang gua bikin)</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suara MC Request</title>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;padding:20px}
+.box{width:100%;max-width:400px;background:#111;border:2px solid gold;border-radius:20px;padding:20px;text-align:center}
+h1{color:gold;margin:0 0 10px}
+input{width:100%;padding:14px;border-radius:10px;border:1px solid #333;background:#000;color:gold;font-size:16px;text-align:center;box-sizing:border-box}
+button{width:100%;padding:14px;margin-top:10px;border-radius:10px;border:none;font-weight:bold;font-size:14px}
+.play{background:gold;color:#000}
+.funkot{background:#ff0066;color:#fff}
+#out{margin-top:15px;background:#000;padding:12px;border-radius:10px;color:gold;min-height:30px}
+.tag{font-size:12px;background:#222;padding:5px 10px;border-radius:20px;margin:3px;display:inline-block}
+</style>
 </head>
 <body>
-<input id="reqName" value="Rahmad Pratama balee kancai kenak die">
-<button onclick="playMC()">PLAY MC</button>
-<button onclick="playMCFunkot()">PLAY + FUNKOT</button>
+<div class="box">
+<h1>🎙️ SUARA MC</h1>
+<input id="nama" value="Rahmad Pratama balee kancai kenak die">
+<div style="margin-top:10px">
+<span class="tag" onclick="nama.value='Rahmad Pratama balee kancai kenak die'">Rahmad</span>
+<span class="tag" onclick="nama.value='Papa Elbay dan Yonz'">Papa Elbay & Yonz</span>
+<span class="tag" onclick="nama.value='Papa Elbay'">Papa Elbay</span>
+</div>
+<button class="play" onclick="mc()">▶️ PLAY MC</button>
+<button class="funkot" onclick="mcfunkot()">🔥 PLAY + FUNKOT DROP</button>
+<div id="out">Siap...</div>
+<p style="font-size:10px;color:#666">Settings > Pages > Branch main > Save biar bisa dibuka di tamayana.github.io/SuaraMc</p>
+</div>
 <script>
-function playMC(){
- let name=document.getElementById('reqName').value;
- let msg=new SpeechSynthesisUtterance(`Spesial request, ${name}!`);
- msg.lang='id-ID'; msg.rate=0.85; msg.pitch=0.6;
- speechSynthesis.speak(msg);
+let a=null;
+function init(){if(!a)a=new(window.AudioContext||window.webkitAudioContext)()}
+function mc(){
+let n=document.getElementById('nama').value;
+let t=`Spesial request, ${n}!`;
+out.innerHTML='🎙️ '+t;
+let m=new SpeechSynthesisUtterance(t);
+m.lang='id-ID';m.rate=0.85;m.pitch=0.6;
+speechSynthesis.cancel();speechSynthesis.speak(m);
 }
+function mcfunkot(){
+init();
+let n=document.getElementById('nama').value;
+let t=`Spesial request, ${n}, balee kancai kenak die! DJ DS on the mix!`;
+out.innerHTML='🎙️ '+t+'<br>⏳ funkot drop 3 detik...';
+let m=new SpeechSynthesisUtterance(t);
+m.lang='id-ID';m.rate=0.84;m.pitch=0.6;
+speechSynthesis.cancel();speechSynthesis.speak(m);
+setTimeout(()=>{
+let ct=a.currentTime,beat=60/155;
+function kick(at){let o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(160,at);o.frequency.exponentialRampToValueAtTime(40,at+0.18);g.gain.setValueAtTime(1,at);g.gain.exponentialRampToValueAtTime(0.01,at+0.4);o.connect(g);g.connect(a.destination);o.start(at);o.stop(at+0.5);}
+for(let i=0;i<16;i++)kick(ct+0.2+i*beat);
+out.innerHTML+='<br>🥁 DUT DUT DUT!';
+},3200);
+}
+speechSynthesis.onvoiceschanged=()=>{speechSynthesis.getVoices()};
 </script>
 </body>
 </html>
