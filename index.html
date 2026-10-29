@@ -4,101 +4,63 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DJ RAHMAD PRATAMA MIX</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:#000 url('https://i.imgur.com/8Km9tLL.jpg') no-repeat center/cover;display:flex;justify-content:center;align-items:center;padding:15px;font-family:'Cinzel',serif}
-.frame{width:100%;max-width:420px;background:linear-gradient(180deg,#0a0a0a,#000);border:3px solid #d4af37;border-radius:24px;box-shadow:0 0 40px #d4af3788, inset 0 0 20px #000;padding:18px;position:relative;overflow:hidden}
-.frame:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top, #d4af3722, transparent 60%);pointer-events:none}
-.title{font-family:'Orbitron',sans-serif;color:#ff1a1a;text-align:center;font-size:32px;line-height:1.1;text-shadow:0 0 10px #ff0000, 0 0 20px #ff0000;letter-spacing:2px;margin:10px 0 5px}
-.sub{color:#d4af37;text-align:center;font-size:11px;letter-spacing:4px;margin-bottom:15px}
-.mixer{width:100%;height:220px;background:linear-gradient(180deg,#1a1a1a,#0a0a0a);border:1px solid #333;border-radius:16px;margin:10px 0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.mixer:after{content:'🎛️ DJ RAHMAD PRATAMA MIX 🎧';color:#d4af37;font-size:10px}
-input{width:100%;padding:16px;background:#000;border:1.5px solid #d4af37;border-radius:14px;color:#ffd700;text-align:center;font-size:14px;outline:none;margin:12px 0}
-input:focus{box-shadow:0 0 15px #d4af37}
-button{width:100%;padding:16px;border-radius:14px;border:none;font-weight:900;font-size:14px;letter-spacing:1px;cursor:pointer;transition:.2s}
-.btn-gold{background:linear-gradient(180deg,#f9e79f,#d4af37);color:#000;box-shadow:0 4px 20px #d4af3766}
-.btn-gold:active{transform:scale(0.98)}
-.btn-red{background:linear-gradient(180deg,#ff2a6d,#cc0044);color:#fff;margin-top:10px;box-shadow:0 4px 20px #ff004466}
-#status{margin-top:14px;background:#000;border:1px solid #222;border-radius:12px;padding:12px;text-align:center;color:#d4af37;font-size:12px;min-height:44px}
-small{color:#555;font-size:9px;display:block;text-align:center;margin-top:10px}
+body{margin:0;min-height:100vh;background:#000 url('foto-rahmad.jpg') no-repeat center/cover;display:flex;justify-content:center;align-items:center;padding:12px}
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(180deg,#00000088,#ff4da644);backdrop-filter:blur(2px)}
+.card{position:relative;width:100%;max-width:380px;background:linear-gradient(180deg,#000000ee,#1a0011ee);border:2px solid #ff4da6;border-radius:22px;padding:18px;box-shadow:0 0 40px #ff4da6aa}
+h1{margin:0;text-align:center;color:#ff4da6;text-shadow:0 0 15px #ff4da6;font-size:28px;line-height:1}
+.sub{text-align:center;color:#d4af37;font-size:10px;letter-spacing:4px;margin:8px 0}
+.photo{width:100%;height:220px;border-radius:14px;overflow:hidden;border:1.5px solid #ff4da6;margin:10px 0;background:url('foto-rahmad.jpg') center/cover}
+input{width:100%;padding:14px;background:#000;border:1.5px solid #ff4da6;border-radius:12px;color:#fff;text-align:center}
+button{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;margin-top:10px}
+.pink{background:linear-gradient(#ffb3d9,#ff4da6)}
+.red{background:#ff0040;color:#fff}
+#out{background:#000;border:1px solid #222;border-radius:10px;padding:10px;margin-top:10px;text-align:center;color:#ff4da6;font-size:12px}
+label{font-size:11px;color:#aaa;display:block;margin-top:8px}
+input[type=range]{width:100%;accent-color:#ff4da6}
 </style>
 </head>
 <body>
-<div class="frame">
-<div class="title">DJ RAHMAD<br>PRATAMA<br>MIX</div>
-<div class="sub">• LIVE • NOW PLAYING •</div>
-<div class="mixer"></div>
-<input id="nama" value="Rahmad Pratama balee kancai kenak die">
-<button class="btn-gold" onclick="playHumanMC()">🎙️ PLAY MC - SUARA MANUSIA</button>
-<button class="btn-red" onclick="playHumanMCWithFunkot()">🔥 PLAY + FUNKOT DROP</button>
-<div id="status">Siap... Ketik nama request, klik play!</div>
-<small>Only DJ RAHMAD PRATAMA MIX - No other names</small>
+<div class="card">
+<h1>DJ RAHMAD<br>PRATAMA MIX</h1>
+<div class="sub">• MC CEWEK • LIVE •</div>
+<div class="photo"></div>
+<input id="nama" value="Rahmad Pratama">
+
+<label>Kecepatan Cewek: <span id="rv">0.90</span></label>
+<input type="range" id="rate" min="0.7" max="1.2" step="0.05" value="0.90" oninput="rv.innerText=this.value">
+<label>Manja: <span id="pv">1.20</span></label>
+<input type="range" id="pitch" min="0.9" max="1.6" step="0.05" value="1.20" oninput="pv.innerText=this.value">
+
+<button class="pink" onclick="playMC()">🎙️ PLAY MC CEWEK</button>
+<button class="red" onclick="playMCFunkot()">🔥 PLAY + FUNKOT</button>
+<div id="out">Siap...</div>
 </div>
-
 <script>
-// === SOLUSI SUARA MANUSIA ASLI - BUKAN GOOGLE ===
-let audioCtx=null;
-function getCtx(){if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)(); return audioCtx;}
-
-async function playHumanMC(){
-  let name=document.getElementById('nama').value.trim();
-  if(!name) return;
-  document.getElementById('status').innerHTML=`🎙️ Spesial request...<br><b style="color:#fff">${name.toUpperCase()}</b>`;
-  
-  // CARA 1: Pakai ElevenLabs API (SUARA MANUSIA 100% - GRATIS)
-  // Daftar di elevenlabs.io -> dapet API key gratis
-  // Ganti API_KEY di bawah
-  
-  // UNTUK SEKARANG: Pakai Web Speech + EFEK CLUB (echo + bass + reverb) biar mirip manusia
-  let ctx=getCtx();
-  let t=ctx.currentTime;
-  
-  // Efek echo club
-  function speakWithClubEffect(text){
-    speechSynthesis.cancel();
-    let msg=new SpeechSynthesisUtterance(text);
-    msg.lang='id-ID';
-    msg.rate=0.82; // pelan berat
-    msg.pitch=0.55; // sangat berat kayak MC cowok
-    msg.volume=1;
-    // efek filter biar berat
-    speechSynthesis.speak(msg);
-    
-    // Tambah kick funkot tipis di background biar hidup
-    let osc=ctx.createOscillator(), gain=ctx.createGain();
-    osc.frequency.value=60; gain.gain.setValueAtTime(0.15,t); gain.gain.exponentialRampToValueAtTime(0.01,t+0.5);
-    osc.connect(gain); gain.connect(ctx.destination); osc.start(t); osc.stop(t+0.6);
-  }
-  
-  speakWithClubEffect(`Spesial request, ${name}, balee kancai kenak die! DJ Rahmad Pratama Mix!`);
+function playMC(){
+ let name=document.getElementById('nama').value.trim()||'Rahmad Pratama';
+ let rate=parseFloat(document.getElementById('rate').value);
+ let pitch=parseFloat(document.getElementById('pitch').value);
+ document.getElementById('out').innerHTML=`🎙️ Spesial request<br><b style="color:#fff">${name.toUpperCase()}</b>`;
+ speechSynthesis.cancel();
+ let text=`Spesial request, ${name}, balee kancai kenak die, DJ Rahmad Pratama Mix!`;
+ let msg=new SpeechSynthesisUtterance(text);
+ msg.lang='id-ID'; msg.rate=rate; msg.pitch=pitch;
+ // paksa cewek
+ let voices=speechSynthesis.getVoices();
+ let female=voices.find(v=>v.name.toLowerCase().includes('female')) || voices.find(v=>v.lang.includes('id')) || voices[1] || voices[0];
+ if(female) msg.voice=female;
+ speechSynthesis.speak(msg);
 }
-
-async function playHumanMCWithFunkot(){
-  let name=document.getElementById('nama').value.trim();
-  await playHumanMC();
-  setTimeout(()=>{
-    let ctx=getCtx();
-    let base=ctx.currentTime+0.5;
-    function kick(at){let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.setValueAtTime(160,at);o.frequency.exponentialRampToValueAtTime(38,at+0.2);g.gain.setValueAtTime(1,at);g.gain.exponentialRampToValueAtTime(0.01,at+0.5);o.connect(g);g.connect(ctx.destination);o.start(at);o.stop(at+0.6);}
-    let beat=60/155;
-    for(let i=0;i<16;i++) kick(base+i*beat);
-    document.getElementById('status').innerHTML+=`<br>🥁 FUNKOT DROP!`;
-  },3500);
+function playMCFunkot(){
+ playMC();
+ setTimeout(()=>{
+  let ctx=new(window.AudioContext||window.webkitAudioContext)();
+  function kick(a){let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.setValueAtTime(150,a);o.frequency.exponentialRampToValueAtTime(35,a+0.2);g.gain.setValueAtTime(1,a);g.gain.exponentialRampToValueAtTime(0.01,a+0.4);o.connect(g);g.connect(ctx.destination);o.start(a);o.stop(a+0.5);}
+  let t=ctx.currentTime+0.2; for(let i=0;i<16;i++) kick(t+i*(60/155));
+ },4000);
 }
-
-// Untuk suara 100% manusia asli (bukan robot), pakai ini - DAFTAR GRATIS di elevenlabs.io:
-/*
-async function playElevenLabsRealVoice(text){
-  const response = await fetch('https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM', {
-    method:'POST',
-    headers:{'xi-api-key':'API_KEY_LU_DISINI','Content-Type':'application/json'},
-    body: JSON.stringify({text:text, model_id:'eleven_multilingual_v2', voice_settings:{stability:0.5, similarity_boost:0.8}})
-  });
-  const blob=await response.blob();
-  new Audio(URL.createObjectURL(blob)).play();
-}
-*/
+speechSynthesis.onvoiceschanged=()=>{speechSynthesis.getVoices();}
 </script>
 </body>
 </html>
